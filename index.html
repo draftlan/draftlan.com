@@ -43,27 +43,59 @@
     </div>
     
     <script>
-        // Simple 3D effect on mouse move with smoother transitions
+        // Viscous fluid-like animation
+        const container = document.querySelector('.maintenance-container');
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+        let shadowX = 0, shadowY = 0;
+        let animating = false;
+        
+        // Track mouse position
         document.addEventListener('mousemove', function(e) {
-            const container = document.querySelector('.maintenance-container');
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
             
-            // Apply smooth transitions
-            container.style.transition = 'transform 0.1s ease-out';
-            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            // Calculate rotation based on mouse position relative to window center
+            targetX = (windowWidth / 2 - e.pageX) / 50;
+            targetY = (windowHeight / 2 - e.pageY) / 50;
             
-            // Dynamic shadows based on mouse position
-            const shadowX = xAxis * -2;
-            const shadowY = yAxis * -2;
-            container.style.boxShadow = `${shadowX}px ${shadowY}px 50px rgba(0,0,0,0.15), 0 20px 70px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.1)`;
+            if (!animating) {
+                animating = true;
+                requestAnimationFrame(animateContainer);
+            }
         });
         
-        // Reset on mouse leave with smooth transition
-        document.querySelector('.maintenance-container').addEventListener('mouseleave', function() {
-            this.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
-            this.style.transform = 'rotateY(0deg) rotateX(0deg)';
-            this.style.boxShadow = '0 20px 70px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.15) inset';
+        // Animate with viscous, fluid effect
+        function animateContainer() {
+            // Calculate movement with viscous effect (easing)
+            currentX += (targetX - currentX) * 0.08;
+            currentY += (targetY - currentY) * 0.08;
+            
+            // Apply subtle drift even after stopping to simulate fluid movement
+            shadowX = currentX * -2.5;
+            shadowY = currentY * -2.5;
+            
+            // Apply transforms with some wobble effect
+            container.style.transform = `rotateY(${currentX}deg) rotateX(${currentY}deg)`;
+            container.style.boxShadow = `${shadowX}px ${shadowY}px 50px rgba(0,0,0,0.15), 0 20px 70px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.1)`;
+            
+            // Continue animation if still moving
+            if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+                requestAnimationFrame(animateContainer);
+            } else {
+                animating = false;
+            }
+        }
+        
+        // Gradually reset when mouse leaves
+        document.addEventListener('mouseleave', function() {
+            targetX = 0;
+            targetY = 0;
+            
+            if (!animating) {
+                animating = true;
+                requestAnimationFrame(animateContainer);
+            }
         });
     </script>
 </body>

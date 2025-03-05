@@ -54,6 +54,10 @@ body::before {
     perspective: 1000px;
     position: relative;
     overflow: hidden;
+    transition: none; /* Remove transition to allow for viscous JS animation */
+    will-change: transform, box-shadow; /* Optimize for animation performance */
+    transform: rotateY(0deg) rotateX(0deg); /* Default position */
+    cursor: default; /* Prevent cursor change to help with the fluid feeling */
 }
 
 /* Add blob shape to container background */
@@ -344,18 +348,25 @@ small {
 }
 
 @keyframes float1 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-15px, 15px); }
+     0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-15px, 15px) scale(1.05); }
+    50% { transform: translate(-5px, 20px) scale(1); }
+    75% { transform: translate(-20px, 5px) scale(0.95); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
 @keyframes float2 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -10px); }
+    0% { transform: translate(0, 0) scale(1); }
+    30% { transform: translate(15px, -10px) scale(1.1); }
+    60% { transform: translate(5px, -15px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
 @keyframes float3 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-10px, -15px); }
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33% { transform: translate(-10px, -15px) rotate(5deg) scale(1.1); }
+    66% { transform: translate(-15px, -5px) rotate(-5deg) scale(0.9); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); }
 }
 
 @media (max-width: 580px) {
