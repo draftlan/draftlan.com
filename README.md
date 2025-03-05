@@ -1,5 +1,5 @@
 # draftlan.com
-Where dreams come true
+Where ideas become reality
 
 ## Coming Soon
 Website under development. We are creating amazing solutions for our users.
