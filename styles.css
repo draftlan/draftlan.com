@@ -176,42 +176,46 @@ p {
 .highlight {
     font-weight: 500;
     color: #2b5876;
-    background: linear-gradient(135deg, rgba(43, 88, 118, 0.15), rgba(78, 67, 118, 0.15));
-    padding: 0.8rem 1.5rem;
-    border-radius: 20px;
+    background: none; /* Remove background */
+    padding: 0.6rem 0; /* Remove horizontal padding, keep some vertical */
+    border-radius: 0; /* Remove border radius */
     display: inline-block;
     margin: 0.8rem auto; /* Center horizontally */
-    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
     transform: translateZ(10px);
-    transition: all 0.3s ease;
     position: relative;
-    white-space: nowrap; /* Keep text on one line */
-    overflow: visible; /* Show all content */
-    width: auto; /* Size based on content */
-    max-width: min-content; /* Adjust to content */
-    font-size: 1.1rem; /* Slightly smaller font size */
-    letter-spacing: -0.01em; /* Tighter letter spacing */
+    white-space: nowrap;
+    overflow: visible;
+    width: auto;
+    max-width: min-content;
+    font-size: 1.3rem; /* Increase font size */
+    letter-spacing: -0.01em;
+    border-bottom: 2px solid rgba(43, 88, 118, 0.3); /* Add subtle underline */
+    box-shadow: none; /* Remove box shadow */
 }
 
 .highlight::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s;
+    content: none; /* Remove the hover effect */
 }
 
 .highlight:hover {
-    transform: translateZ(15px) translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transform: translateZ(15px); /* Remove the Y translation */
+    box-shadow: none; /* Remove hover shadow */
 }
 
-.highlight:hover::before {
-    opacity: 1;
+/* Replace the radial gradient hover with a simpler effect */
+.highlight::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #2b5876, #4e4376);
+    transition: width 0.4s ease;
+}
+
+.highlight:hover::after {
+    width: 100%;
 }
 
 small {
@@ -415,9 +419,13 @@ small {
     }
     
     .highlight {
-        font-size: 0.85rem; /* Even smaller font on mobile */
-        padding: 0.6rem 1rem;
-        letter-spacing: -0.02em; /* Tighter letter spacing on mobile */
+        font-size: 1.1rem; /* Adjust for mobile */
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(43, 88, 118, 0.3);
+    }
+    
+    .highlight::after {
+        height: 1px;
     }
     
     .maintenance-note {
@@ -444,9 +452,8 @@ small {
 /* Additional media query for very small screens */
 @media (max-width: 360px) {
     .highlight {
-        font-size: 0.75rem;
-        padding: 0.5rem 0.8rem;
-        letter-spacing: -0.03em;
+        font-size: 0.95rem;
+        padding: 0.4rem 0;
     }
 }
 
