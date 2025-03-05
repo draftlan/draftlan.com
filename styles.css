@@ -186,7 +186,7 @@ p {
     white-space: nowrap;
     overflow: visible;
     width: auto;
-    max-width: min-content;
+    max-width: none; /* Remove min-content restriction */
     font-size: 1.3rem;
     letter-spacing: -0.01em;
     border-bottom: none; /* Remove bottom border - we'll add it via pseudo-element */
@@ -441,8 +441,20 @@ small {
     }
     
     .highlight {
-        font-size: 1.1rem;
-        padding: 0.6rem 0; /* Adjust padding for mobile */
+        font-size: 1rem; /* Smaller font on mobile */
+        padding: 0.6rem 0;
+        letter-spacing: -0.02em; /* Tighter letter spacing on mobile */
+        width: 90%; /* Control width on small screens */
+        /* Wrap the text on smaller screens */
+        white-space: normal;
+        line-height: 1.4;
+    }
+    
+    .highlight::before,
+    .highlight::after {
+        width: 80%; /* Adjust line width */
+        left: 10%;
+        right: 10%;
     }
     
     .highlight::after {
@@ -470,11 +482,20 @@ small {
     }
 }
 
+/* Additional media query for mid-sized mobile phones */
+@media (max-width: 420px) {
+    .highlight {
+        font-size: 0.9rem;
+    }
+}
+
 /* Additional media query for very small screens */
 @media (max-width: 360px) {
     .highlight {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         padding: 0.4rem 0;
+        width: 95%; /* More width on very small screens */
+        line-height: 1.3;
     }
 }
 
