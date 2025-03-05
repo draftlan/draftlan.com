@@ -406,10 +406,20 @@ small {
 }
 
 @media (max-width: 580px) {
+    body {
+        padding: 30px 20px; /* Ensure consistent padding on mobile */
+        min-height: 100vh; /* Reinforce full height */
+        height: -webkit-fill-available; /* iOS height fix */
+    }
+    
     .maintenance-container {
         padding: 2rem 1.5rem;
         max-height: none; /* Remove max-height constraint */
         overflow: hidden; /* Remove scrolling */
+        margin: auto; /* Ensure centering */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     h1 {
@@ -480,6 +490,11 @@ small {
         width: 25px;
         height: 25px;
     }
+    
+    .content {
+        padding: 10px 0; /* Add vertical padding inside */
+        width: 100%; /* Ensure content takes full width */
+    }
 }
 
 /* Additional media query for mid-sized mobile phones */
@@ -540,5 +555,16 @@ small {
     
     .highlight {
         padding: 0.5rem 1rem;
+    }
+}
+
+/* Ensure vertical centering on iOS devices */
+@supports (-webkit-touch-callout: none) {
+    body {
+        height: -webkit-fill-available;
+    }
+    
+    .maintenance-container {
+        margin: auto;
     }
 }
