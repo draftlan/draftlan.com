@@ -20,12 +20,44 @@
             <h1>draftlan.com</h1>
             <div class="divider"></div>
             <h2>Coming Soon</h2>
-            <p><small>Under Maintenance</small></p>
-            <p>We are creating amazing solutions for you.</p>
+            
+            <div class="maintenance-note">
+                <i class="fas fa-tools"></i> <small>Site under maintenance</small>
+            </div>
+            
+            <p class="highlight">
+                We are creating amazing solutions for you.
+            </p>
+            
             <p>Our site is currently under development.</p>
+            
             <p>Soon you will discover everything Draftlan has to offer.</p>
+            
             <p class="tagline">Where ideas become reality</p>
+            
+            <div class="contact-info">
+                <p>Need to contact us?</p>
+                <a href="mailto:info@draftlan.com" class="contact-button">
+                    <i class="far fa-envelope"></i> info@draftlan.com
+                </a>
+            </div>
         </div>
     </div>
+    
+    <script>
+        // Simple 3D effect on mouse move
+        document.addEventListener('mousemove', function(e) {
+            const container = document.querySelector('.maintenance-container');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        
+        // Reset on mouse leave
+        document.querySelector('.maintenance-container').addEventListener('mouseleave', function() {
+            this.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
 </body>
 </html>
