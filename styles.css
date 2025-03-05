@@ -44,8 +44,9 @@ body::before {
     box-shadow: 0 20px 70px rgba(0,0,0,0.2),
                 0 10px 30px rgba(0,0,0,0.1),
                 0 0 0 1px rgba(255,255,255,0.15) inset;
-    padding: 3.5rem;
+    padding: 2.5rem;
     max-width: 650px;
+    max-height: 90vh; /* Limit maximum height to 90% of viewport height */
     width: 100%;
     text-align: center;
     animation: fadeIn 1.2s ease-out;
@@ -53,7 +54,7 @@ body::before {
     transform-style: preserve-3d;
     perspective: 1000px;
     position: relative;
-    overflow: hidden;
+    overflow: auto; /* Allow scrolling if content exceeds container height */
     transition: none; /* Remove transition to allow for viscous JS animation */
     will-change: transform, box-shadow; /* Optimize for animation performance */
     transform: rotateY(0deg) rotateX(0deg); /* Default position */
@@ -87,6 +88,10 @@ body::before {
 
 .content {
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo {
@@ -94,7 +99,7 @@ body::before {
     background: linear-gradient(135deg, #4e4376, #2b5876);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced margin */
     animation: pulse 3s infinite;
     display: inline-block;
     filter: drop-shadow(0 5px 15px rgba(78, 67, 118, 0.3));
@@ -123,7 +128,7 @@ h1 {
     height: 4px;
     background: linear-gradient(90deg, #2b5876, #4e4376);
     width: 120px;
-    margin: 25px auto;
+    margin: 15px auto; /* Reduced margin */
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(78, 67, 118, 0.2);
     position: relative;
@@ -159,7 +164,7 @@ h2 {
 }
 
 p {
-    margin-bottom: 18px;
+    margin-bottom: 12px; /* Reduced margin */
     font-size: 1.2rem;
     color: #444;
     line-height: 1.8;
@@ -169,7 +174,7 @@ p {
 }
 
 .highlight {
-    font-weight: 500;
+    font-weight: 400;
     color: #2b5876;
     background: linear-gradient(135deg, rgba(43, 88, 118, 0.15), rgba(78, 67, 118, 0.15));
     padding: 1rem 2rem;
@@ -236,7 +241,7 @@ small {
 }
 
 .tagline {
-    margin-top: 40px;
+    margin-top: 20px; /* Reduced margin */
     font-style: italic;
     color: #4e4376;
     font-weight: 600;
@@ -371,7 +376,9 @@ small {
 
 @media (max-width: 580px) {
     .maintenance-container {
-        padding: 2.5rem 1.5rem;
+        padding: 2rem 1.5rem;
+        max-height: 85vh;
+        overflow-y: auto;
     }
     
     h1 {
@@ -393,14 +400,79 @@ small {
     
     .divider {
         width: 80px;
-        margin: 15px auto;
+        margin: 10px auto;
     }
     
     .tagline {
+        margin-top: 15px;
         font-size: 1.1rem;
+        padding: 0.6rem 1.5rem;
     }
     
     .highlight {
         padding: 0.6rem 1rem;
+    }
+    
+    .maintenance-note {
+        margin: 0.8rem 0;
+    }
+    
+    /* Reduce size of floating circles on small screens */
+    .circle1 {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .circle2 {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .circle3 {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Additional media query for very tall screens */
+@media (min-height: 800px) {
+    .maintenance-container {
+        max-height: 80vh;
+    }
+}
+
+/* Additional media query for very short screens */
+@media (max-height: 600px) {
+    .maintenance-container {
+        padding: 1.5rem;
+        max-height: 95vh;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 5px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .divider {
+        margin: 8px auto;
+    }
+    
+    p {
+        margin-bottom: 8px;
+        font-size: 1rem;
+    }
+    
+    .highlight {
+        padding: 0.5rem 1rem;
     }
 }
