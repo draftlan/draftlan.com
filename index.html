@@ -13,6 +13,11 @@
 </head>
 <body>
     <div class="maintenance-container">
+        <!-- Add floating circles for more organic design -->
+        <div class="floating-circle circle1"></div>
+        <div class="floating-circle circle2"></div>
+        <div class="floating-circle circle3"></div>
+        
         <div class="content">
             <div class="logo">
                 <i class="fas fa-drafting-compass"></i>
@@ -38,18 +43,27 @@
     </div>
     
     <script>
-        // Simple 3D effect on mouse move
+        // Simple 3D effect on mouse move with smoother transitions
         document.addEventListener('mousemove', function(e) {
             const container = document.querySelector('.maintenance-container');
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
             
+            // Apply smooth transitions
+            container.style.transition = 'transform 0.1s ease-out';
             container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            
+            // Dynamic shadows based on mouse position
+            const shadowX = xAxis * -2;
+            const shadowY = yAxis * -2;
+            container.style.boxShadow = `${shadowX}px ${shadowY}px 50px rgba(0,0,0,0.15), 0 20px 70px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.1)`;
         });
         
-        // Reset on mouse leave
+        // Reset on mouse leave with smooth transition
         document.querySelector('.maintenance-container').addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
             this.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            this.style.boxShadow = '0 20px 70px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.15) inset';
         });
     </script>
 </body>
